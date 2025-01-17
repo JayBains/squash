@@ -5,28 +5,28 @@
 
 ## HTML/CSS
 
-    [ ] Score counter
-    [ ] Highscore
-    [ ] Playing field
-    [ ] Ball
-    [ ] Paddle
-    [ ] Retro aesthetic
+- [ ] Score counter
+- [ ] Highscore
+- [ ] Playing field
+- [ ] Ball
+- [ ] Paddle
+- [ ] Retro aesthetic
 
 ## TS
 
-    [ ] Ball
-        [ ] Movement
-            [ ] Speed increased as game progresses
-        [ ] Collider
-    [ ] Walls top/left/right
-        [ ] Collider
-            [ ] Ball changes trajectory
-            [ ] Score ++ (or maybe round duration?)
-    [ ] Paddle
-        [ ] Movement
-            [ ] User input
-        [ ] Collider
-            [ ] Ball changes trajectory
-    [ ] Walls bottom
-        [ ] Reset game
-        [ ] Highscore check
+- [ ] Ball
+  - [ ] Movement
+    - [ ] Speed increased as game progresses
+  - [ ] Collider
+- [ ] Walls top/left/right
+  - [ ] Collider
+    - [ ] Ball changes trajectory
+    - [ ] Score ++ (or maybe round duration?)
+- [ ] Paddle
+  - [ ] Movement
+    - [ ] User input
+  - [ ] Collider
+        [ ] Ball changes trajectory
+- [ ] Walls bottom
+  - [ ] Reset game
+  - [ ] Highscore check
