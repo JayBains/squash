@@ -1,0 +1,28 @@
+body {
+  background-color: burlywood;
+}
+
+.gameContainer {
+  position: relative;
+  width: 600px;
+  height: 400px;
+  border: 1px solid purple;
+  margin: 0 auto;
+  overflow: hidden;
+
+  &__ball {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background-color: orange;
+    border-radius: 50%;
+  }
+
+  &__paddle {
+    position: absolute;
+    bottom: 0;
+    width: 100px;
+    height: 10px;
+    background-color: pink;
+  }
+}
