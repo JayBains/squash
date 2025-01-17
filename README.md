@@ -5,11 +5,11 @@
 
 ## HTML/CSS
 
-- [ ] Score counter
-- [ ] Highscore
-- [ ] Playing field
-- [ ] Ball
-- [ ] Paddle
+- [x] Score counter
+- [x] Highscore
+- [x] Playing field
+- [x] Ball
+- [x] Paddle
 - [ ] Retro aesthetic
 
 ## TS
