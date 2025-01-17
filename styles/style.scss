@@ -1,12 +1,12 @@
 body {
-  background-color: burlywood;
+  background-color: black;
 }
 
 .gameContainer {
   position: relative;
   width: 600px;
   height: 400px;
-  border: 1px solid purple;
+  border: 1px solid white;
   margin: 0 auto;
   overflow: hidden;
 
@@ -14,15 +14,15 @@ body {
     position: absolute;
     width: 20px;
     height: 20px;
-    background-color: orange;
+    background-color: white;
     border-radius: 50%;
   }
 
   &__paddle {
     position: absolute;
-    bottom: 0;
+    bottom: 1px;
     width: 100px;
     height: 10px;
-    background-color: pink;
+    background-color: white;
   }
 }
