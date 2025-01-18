@@ -21,9 +21,9 @@
 - [ ] Walls top/left/right
   - [ ] Collider
     - [ ] Ball changes trajectory
-- [ ] Paddle
-  - [ ] Movement
-    - [ ] User input
+- [x] Paddle
+  - [x] Movement
+    - [x] User input
   - [ ] Collider
     - [ ] Ball changes trajectory
     - [ ] Score ++ (or maybe round duration?)
