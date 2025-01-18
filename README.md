@@ -29,7 +29,7 @@
     - [x] Mouse input
     - [ ] Touch input
   - [ ] Collider
-    - [ ] Ball changes trajectory (depending on part of paddle hit?)
+    - [x] Ball changes trajectory (depending on part of paddle hit?)
     - [ ] Score ++ (or maybe round duration?)
 - [ ] Walls (bottom)
   - [ ] Highscore check
