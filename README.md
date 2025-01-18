@@ -21,12 +21,16 @@
 - [ ] Walls top/left/right
   - [ ] Collider
     - [ ] Ball changes trajectory
-    - [ ] Score ++ (or maybe round duration?)
 - [ ] Paddle
   - [ ] Movement
     - [ ] User input
   - [ ] Collider
-        [ ] Ball changes trajectory
+    - [ ] Ball changes trajectory
+    - [ ] Score ++ (or maybe round duration?)
 - [ ] Walls bottom
   - [ ] Reset game
   - [ ] Highscore check
+- [ ] Game loop
+  - [ ] animation
+    - [ ] Detect collisions
+    - [ ] Move Ball
