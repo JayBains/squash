@@ -10,7 +10,7 @@
 - [x] Playing field
 - [x] Ball
 - [x] Paddle
-- [ ] Retro aesthetic
+- [x] Retro aesthetic
 
 ## TS
 
