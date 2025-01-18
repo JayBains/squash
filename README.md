@@ -11,21 +11,23 @@
 - [x] Ball
 - [x] Paddle
 - [x] Retro aesthetic
+- [ ] About page?
 
 ## TS
 
 - [x] Ball
   - [x] Movement
     - [ ] Speed increased as game progresses
-- [ ] Walls
-  - [ ] Collider
+- [x] Walls
+  - [x] Collider
     - [x] Left wall
     - [x] Right wall
-    - [ ] Top wall
-    - [ ] Ball changes trajectory
-- [x] Paddle
+    - [x] Top wall
+    - [x] Ball changes trajectory
+- [ ] Paddle
   - [x] Movement
-    - [x] User input
+    - [x] Mouse input
+    - [ ] Touch input
   - [ ] Collider
     - [ ] Ball changes trajectory (depending on part of paddle hit?)
     - [ ] Score ++ (or maybe round duration?)
@@ -33,6 +35,8 @@
   - [ ] Highscore check
   - [ ] Reset game
 - [ ] Game loop
-  - [] Animation
-    - [] Detect collisions
-    - [] Move Ball
+  - [x] Animation
+    - [x] Detect collisions
+    - [x] Move Ball
+  - [ ] Update scores
+  - [ ] Game over? (lives?)

@@ -8,9 +8,9 @@ let paddle = document.getElementById("paddle") as HTMLElement;
 
 let paddleX = 0;
 let ballX = 100;
-let ballY = 0;
-let speedX = -2;
-let speedY = 0.2;
+let ballY = 100;
+let speedX = 3;
+let speedY = -2;
 
 document.addEventListener("mousemove", (event) => {
   let mouseX = event.clientX - game.offsetLeft;
@@ -33,6 +33,8 @@ function collisionDetection() {
     ballX + speedX > game.offsetWidth - ball.offsetWidth
   ) {
     speedX = -speedX;
+  } else if (ballY + speedY < 0) {
+    speedY = -speedY;
   }
 }
 
