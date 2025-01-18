@@ -14,8 +14,8 @@
 
 ## TS
 
-- [ ] Ball
-  - [ ] Movement
+- [x] Ball
+  - [x] Movement
     - [ ] Speed increased as game progresses
   - [ ] Collider
 - [ ] Walls top/left/right
