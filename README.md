@@ -33,4 +33,4 @@
 - [ ] Game loop
   - [ ] animation
     - [ ] Detect collisions
-    - [ ] Move Ball
+    - [x] Move Ball
