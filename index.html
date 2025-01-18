@@ -3,18 +3,17 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="./styles/style.scss" />
     <title>Pong</title>
   </head>
   <body>
-    <div>
-      <div class="header">
-        <p class="header__score" id="score">Score: 0</p>
-        <p class="header__highscore" id="highscore">Highscore: 0</p>
+    <div class="container">
+      <div class="scoreboard">
+        <p class="scoreboard__score" id="score">Score: 0</p>
+        <p class="scoreboard__highscore" id="highscore">Highscore: 0</p>
       </div>
-      <div class="gameContainer" id="gameContainer">
-        <div class="gameContainer__ball" id="ball"></div>
-        <div class="gameContainer__paddle" id="paddle"></div>
+      <div class="game" id="gameContainer">
+        <div class="game__ball" id="ball"></div>
+        <div class="game__paddle" id="paddle"></div>
       </div>
     </div>
     <script type="module" src="./src/main.ts"></script>
