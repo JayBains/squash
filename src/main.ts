@@ -6,16 +6,22 @@ let highscoreCounter = document.getElementById("highscore") as HTMLElement;
 let ball = document.getElementById("ball") as HTMLElement;
 let paddle = document.getElementById("paddle") as HTMLElement;
 
-let paddleX = 0;
+const gameW = game.offsetWidth;
+const gameH = game.offsetHeight;
+const ballW = ball.offsetWidth;
+const ballH = ball.offsetHeight;
+const paddleW = paddle.offsetWidth;
+
 let ballX = 100;
 let ballY = 100;
 let speedX = 5;
 let speedY = 5;
+let paddleX = 0;
 
 document.addEventListener("mousemove", (event) => {
   let mouseX = event.clientX - game.offsetLeft;
-  if (mouseX > 0 && mouseX < game.offsetWidth) {
-    paddleX = mouseX - paddle.offsetWidth / 2;
+  if (mouseX > 0 && mouseX < gameW) {
+    paddleX = mouseX - paddleW / 2;
     paddle.style.left = paddleX + "px";
   }
 });
@@ -27,26 +33,26 @@ function ballMovement() {
   ball.style.top = ballY + "px";
 }
 
-function collisionDetection() {
-  if (
-    ballX + speedX < 0 ||
-    ballX + speedX > game.offsetWidth - ball.offsetWidth
-  ) {
+function wallCollision() {
+  if (ballX + speedX < 0 || ballX + speedX > gameW - ballW) {
     speedX = -speedX;
   } else if (ballY + speedY < 0) {
-    speedY = -speedY;
-  } else if (
-    ballY > paddle.offsetTop &&
-    ballX > paddle.offsetLeft &&
-    ballX < paddle.offsetLeft + paddle.offsetWidth
-  ) {
     speedY = -speedY;
   }
 }
 
+function paddleCollision() {
+  if (ballY + speedY > gameH - ballH) {
+    if (ballX < paddleX + paddleW && ballX > paddleX) {
+      speedY = -speedY;
+    }
+  }
+}
+
 function run() {
+  wallCollision();
+  paddleCollision();
   ballMovement();
-  collisionDetection();
 }
 
 setInterval(run, 1);
