@@ -7,10 +7,10 @@ let ball = document.getElementById("ball") as HTMLElement;
 let paddle = document.getElementById("paddle") as HTMLElement;
 
 let paddleX = 0;
-let ballX = 0;
+let ballX = 100;
 let ballY = 0;
-let speedX = 2;
-let speedY = 2;
+let speedX = -2;
+let speedY = 0.2;
 
 document.addEventListener("mousemove", (event) => {
   let mouseX = event.clientX - game.offsetLeft;
@@ -27,8 +27,18 @@ function ballMovement() {
   ball.style.top = ballY + "px";
 }
 
+function collisionDetection() {
+  if (
+    ballX + speedX < 0 ||
+    ballX + speedX > game.offsetWidth - ball.offsetWidth
+  ) {
+    speedX = -speedX;
+  }
+}
+
 function run() {
   ballMovement();
+  collisionDetection();
   requestAnimationFrame(run);
 }
 
