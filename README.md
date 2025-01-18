@@ -33,7 +33,6 @@
   - [ ] Highscore check
   - [ ] Reset game
 - [ ] Game loop
-  - [x] Animation
-    - [x] Detect collisions
-    - [x] Move Ball
-  - [ ] Game over? (lives?)
+  - [] Animation
+    - [] Detect collisions
+    - [] Move Ball
