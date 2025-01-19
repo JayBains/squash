@@ -16,6 +16,7 @@ let ballX = 100;
 let ballY = 100;
 let speedX = 5;
 let speedY = 5;
+const maxSpeed = 10;
 let paddleX = 0;
 let score = 0;
 let highscore = 0;
@@ -45,15 +46,15 @@ function ballMovement() {
 }
 
 function wallCollision() {
-  if (ballX + speedX < 0 || ballX + speedX > gameW - ballW) {
+  if (ballX <= 0 || ballX >= gameW - ballW) {
     speedX = -speedX;
-  } else if (ballY + speedY < 0) {
+  } else if (ballY <= 0) {
     speedY = -speedY;
   }
 }
 
 function paddleCollision() {
-  if (ballY + speedY > gameH - ballH) {
+  if (ballY + ballH >= gameH) {
     if (ballX < paddleX + paddleW && ballX > paddleX) {
       speedY = -speedY;
       paddleHit();
@@ -65,21 +66,21 @@ function paddleCollision() {
 
 function paddleHit() {
   score++;
-  scoreCounter.textContent = "Score: " + score;
-  speedX = speedX * 1.05;
-  speedY = speedY * 1.05;
+  scoreCounter.textContent = `Score: ${score}`;
+  speedX = Math.min(maxSpeed, speedX * 1.05);
+  speedY = Math.min(maxSpeed, speedY * 1.05);
 }
 
 function gameOver() {
   if (score > highscore) {
     highscore = score;
     highscoreCounter.textContent = "Highscore: " + highscore;
-    console.log("New high score! You got: " + highscore + "!");
+    console.log(`New high score! You got: ${highscore}!`);
   } else {
-    console.log("Nice try. You scored: " + score + ".");
+    console.log(`Nice try. You scored: ${score}.`);
   }
   score = 0;
-  scoreCounter.textContent = "Score: " + score;
+  scoreCounter.textContent = `Score: ${score}`;
   ballX = Math.floor(Math.random() * 600);
   ballY = Math.floor(Math.random() * 150);
   speedX = 5;
