@@ -30,7 +30,7 @@
     - [ ] Touch input
   - [ ] Collider
     - [x] Ball changes trajectory (depending on part of paddle hit?)
-    - [ ] Score ++ (or maybe round duration?)
+    - [x] Score ++ 
 - [ ] Walls (bottom)
   - [ ] Highscore check
   - [ ] Reset game
@@ -39,4 +39,5 @@
     - [x] Detect collisions
     - [x] Move Ball
   - [ ] Update scores
+  - [x] Difficulty increase
   - [ ] Game over? (lives?)
