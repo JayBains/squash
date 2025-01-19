@@ -17,7 +17,7 @@
 
 - [x] Ball
   - [x] Movement
-    - [ ] Speed increased as game progresses
+    - [x] Speed increased as game progresses
 - [x] Walls
   - [x] Collider
     - [x] Left wall
@@ -28,16 +28,15 @@
   - [x] Movement
     - [x] Mouse input
     - [ ] Touch input
-  - [ ] Collider
+  - [x] Collider
     - [x] Ball changes trajectory (depending on part of paddle hit?)
-    - [x] Score ++ 
-- [ ] Walls (bottom)
-  - [ ] Highscore check
-  - [ ] Reset game
-- [ ] Game loop
+    - [x] Score ++
+- [x] Walls (bottom)
+  - [x] Highscore check
+  - [x] Reset game
+- [x] Game loop
   - [x] Animation
     - [x] Detect collisions
     - [x] Move Ball
-  - [ ] Update scores
-  - [x] Difficulty increase
-  - [ ] Game over? (lives?)
+  - [x] Difficulty increase over time
+  - [x] Game over? (lives?)

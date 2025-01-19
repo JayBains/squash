@@ -48,6 +48,8 @@ function paddleCollision() {
     if (ballX < paddleX + paddleW && ballX > paddleX) {
       speedY = -speedY;
       paddleHit();
+    } else {
+      gameOver();
     }
   }
 }
@@ -57,6 +59,22 @@ function paddleHit() {
   scoreCounter.textContent = "Score: " + score;
   speedX = speedX * 1.05;
   speedY = speedY * 1.05;
+}
+
+function gameOver() {
+  if (score > highscore) {
+    highscore = score;
+    highscoreCounter.textContent = "Highscore: " + highscore;
+    console.log("New high score! You got: " + highscore + "!");
+  } else {
+    console.log("Nice try. You scored: " + score + ".");
+  }
+  score = 0;
+  scoreCounter.textContent = "Score: " + score;
+  ballX = Math.floor(Math.random() * 600);
+  ballY = Math.floor(Math.random() * 150);
+  speedX = 5;
+  speedY = 5;
 }
 
 function run() {
