@@ -28,6 +28,15 @@ document.addEventListener("mousemove", (event) => {
   }
 });
 
+document.addEventListener("touchmove", (event) => {
+  event.preventDefault();
+  let mouseX = event.touches[0].clientX - game.offsetLeft;
+  if (mouseX > 0 && mouseX < gameW) {
+    paddleX = mouseX - paddleW / 2;
+    paddle.style.left = paddleX + "px";
+  }
+});
+
 function ballMovement() {
   ballX += speedX;
   ballY += speedY;

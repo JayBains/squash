@@ -1,7 +1,10 @@
-# PONG
+# SQUASH
 
-    This is my version of Pong written in HTML, SCSS and TS.
-    A simple, single player game that can work on mobile and PC.
+    This is my version of single-player squash written in HTML, SCSS and TS.
+
+## Responsiveness
+
+- [ ] Phone compatability
 
 ## HTML/CSS
 
@@ -24,10 +27,10 @@
     - [x] Right wall
     - [x] Top wall
     - [x] Ball changes trajectory
-- [ ] Paddle
+- [x] Paddle
   - [x] Movement
     - [x] Mouse input
-    - [ ] Touch input
+    - [x] Touch input
   - [x] Collider
     - [x] Ball changes trajectory (depending on part of paddle hit?)
     - [x] Score ++
