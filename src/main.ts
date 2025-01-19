@@ -74,7 +74,7 @@ function paddleHit() {
 function gameOver() {
   if (score > highscore) {
     highscore = score;
-    highscoreCounter.textContent = "Highscore: " + highscore;
+    highscoreCounter.textContent = `Highscore: ${highscore}`;
     console.log(`New high score! You got: ${highscore}!`);
   } else {
     console.log(`Nice try. You scored: ${score}.`);
