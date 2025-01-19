@@ -14,8 +14,9 @@ const paddleW = paddle.offsetWidth;
 
 let ballX = 100;
 let ballY = 100;
-let speedX = 5;
-let speedY = 5;
+const INITIALSPEED = 2;
+let speedX = 2;
+let speedY = 2;
 const maxSpeed = 10;
 let paddleX = 0;
 let score = 0;
@@ -54,14 +55,21 @@ function wallBounce() {
 }
 
 function paddleBounce() {
-  if (ballY + ballH >= gameH) {
-    if (ballX < paddleX + paddleW && ballX > paddleX) {
+  if (ballY + ballH + 6 >= gameH) {
+    if (ballX < paddleX + paddleW && ballX + 10 > paddleX) {
       speedY = -speedY;
       hit();
     } else {
       respawn();
     }
   }
+}
+
+function reset() {
+  ballX = Math.floor(Math.random() * 400);
+  ballY = Math.floor(Math.random() * 100);
+  speedX = INITIALSPEED;
+  speedY = INITIALSPEED;
 }
 
 function hit() {
@@ -81,16 +89,14 @@ function respawn() {
   }
   score = 0;
   scoreCounter.textContent = `Score: ${score}`;
-  ballX = Math.floor(Math.random() * 400);
-  ballY = Math.floor(Math.random() * 100);
-  speedX = 5;
-  speedY = 5;
+  reset();
 }
 
 function run() {
+  balling();
   wallBounce();
   paddleBounce();
-  balling();
+  requestAnimationFrame(run);
 }
 
-setInterval(run, 10);
+requestAnimationFrame(run);
