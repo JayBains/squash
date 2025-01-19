@@ -17,6 +17,8 @@ let ballY = 100;
 let speedX = 5;
 let speedY = 5;
 let paddleX = 0;
+let score = 0;
+let highscore = 0;
 
 document.addEventListener("mousemove", (event) => {
   let mouseX = event.clientX - game.offsetLeft;
@@ -45,8 +47,16 @@ function paddleCollision() {
   if (ballY + speedY > gameH - ballH) {
     if (ballX < paddleX + paddleW && ballX > paddleX) {
       speedY = -speedY;
+      paddleHit();
     }
   }
+}
+
+function paddleHit() {
+  score++;
+  scoreCounter.textContent = "Score: " + score;
+  speedX = speedX * 1.05;
+  speedY = speedY * 1.05;
 }
 
 function run() {
