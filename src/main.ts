@@ -38,14 +38,14 @@ document.addEventListener("touchmove", (event) => {
   }
 });
 
-function ballMovement() {
+function balling() {
   ballX += speedX;
   ballY += speedY;
   ball.style.left = ballX + "px";
   ball.style.top = ballY + "px";
 }
 
-function wallCollision() {
+function wallBounce() {
   if (ballX <= 0 || ballX >= gameW - ballW) {
     speedX = -speedX;
   } else if (ballY <= 0) {
@@ -53,25 +53,25 @@ function wallCollision() {
   }
 }
 
-function paddleCollision() {
+function paddleBounce() {
   if (ballY + ballH >= gameH) {
     if (ballX < paddleX + paddleW && ballX > paddleX) {
       speedY = -speedY;
-      paddleHit();
+      hit();
     } else {
-      gameOver();
+      respawn();
     }
   }
 }
 
-function paddleHit() {
+function hit() {
   score++;
   scoreCounter.textContent = `Score: ${score}`;
-  speedX = Math.min(maxSpeed, speedX * 1.05);
-  speedY = Math.min(maxSpeed, speedY * 1.05);
+  speedX = speedX * 1.05;
+  speedY = speedY * 1.05;
 }
 
-function gameOver() {
+function respawn() {
   if (score > highscore) {
     highscore = score;
     highscoreCounter.textContent = `Highscore: ${highscore}`;
@@ -81,16 +81,16 @@ function gameOver() {
   }
   score = 0;
   scoreCounter.textContent = `Score: ${score}`;
-  ballX = Math.floor(Math.random() * 600);
-  ballY = Math.floor(Math.random() * 150);
+  ballX = Math.floor(Math.random() * 400);
+  ballY = Math.floor(Math.random() * 100);
   speedX = 5;
   speedY = 5;
 }
 
 function run() {
-  wallCollision();
-  paddleCollision();
-  ballMovement();
+  wallBounce();
+  paddleBounce();
+  balling();
 }
 
-setInterval(run, 1);
+setInterval(run, 10);

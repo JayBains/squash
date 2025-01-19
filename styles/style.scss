@@ -1,14 +1,3 @@
 @use "./layout";
 @use "./scoreboard";
 @use "./game";
-
-@media only screen and (max-width: 801px) {
-  .scoreboard {
-    visibility: hidden;
-    display: none;
-  }
-
-  .game {
-    height: 350px;
-  }
-}
