@@ -22,7 +22,7 @@ let speedX = 5;
 let speedY = 5;
 const acceleration = 1.1;
 let paddleX = 0;
-let score = 1;
+let score = 0;
 let highscore = 0;
 
 document.addEventListener("mousemove", (event) => {
@@ -58,7 +58,8 @@ function animate() {
   } else if (y + 25 >= rect.bottom - rect.top && speedY > 0) {
     if (x < paddleX + paddleW && x > paddleX) {
       speedY = -speedY;
-      scoreCounter.textContent = `Score: ${score++}`;
+      score++;
+      scoreCounter.textContent = `Score: ${score}`;
       speedX *= acceleration;
       speedY *= acceleration;
     } else {
