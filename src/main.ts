@@ -60,7 +60,7 @@ function animate() {
   } else if (y - 5 <= 0 && speedY < 0) {
     speedY = -speedY;
   } else if (y + 25 >= rect.bottom - rect.top && speedY > 0) {
-    if (x < paddleX + prect.right - prect.left && x > paddleX - 20) {
+    if (x < paddleX + prect.right - prect.left && x + 20 > paddleX) {
       speedY = -speedY;
       score++;
       scoreCounter.textContent = `Score: ${score}`;
