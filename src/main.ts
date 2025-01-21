@@ -1,30 +1,33 @@
 import "/styles/style.scss";
 
-let game = document.getElementById("gameContainer") as HTMLElement;
-let scoreCounter = document.getElementById("score") as HTMLElement;
-let highscoreCounter = document.getElementById("highscore") as HTMLElement;
-let ball = document.getElementById("ball") as HTMLElement;
-let paddle = document.getElementById("paddle") as HTMLElement;
+let game = document.querySelector<HTMLDivElement>("#gameContainer");
+let scoreCounter = document.querySelector<HTMLParagraphElement>("#score");
+let highscoreCounter =
+  document.querySelector<HTMLParagraphElement>("#highscore");
+let ball = document.querySelector<HTMLDivElement>("#ball");
+let paddle = document.querySelector<HTMLDivElement>("#paddle");
 
-const gameW = game.offsetWidth;
-const gameH = game.offsetHeight;
-const ballW = ball.offsetWidth;
-const ballH = ball.offsetHeight;
+if (!game || !scoreCounter || !highscoreCounter || !ball || !paddle) {
+  throw new Error("missing html elements");
+}
+
 const paddleW = paddle.offsetWidth;
+const rect = game.getBoundingClientRect();
 
-let ballX = 100;
-let ballY = 100;
-const INITIALSPEED = 2;
-let speedX = 2;
-let speedY = 2;
-const maxSpeed = 10;
+const Start = 50;
+const StartSpd = 5;
+let x = Start;
+let y = Start;
+let speedX = 5;
+let speedY = 5;
+const acceleration = 1.1;
 let paddleX = 0;
-let score = 0;
+let score = 1;
 let highscore = 0;
 
 document.addEventListener("mousemove", (event) => {
-  let mouseX = event.clientX - game.offsetLeft;
-  if (mouseX > 0 && mouseX < gameW) {
+  let mouseX = event.clientX - rect.left;
+  if (mouseX > 0 && mouseX < rect.right - rect.left) {
     paddleX = mouseX - paddleW / 2;
     paddle.style.left = paddleX + "px";
   }
@@ -32,54 +35,45 @@ document.addEventListener("mousemove", (event) => {
 
 document.addEventListener("touchmove", (event) => {
   event.preventDefault();
-  let mouseX = event.touches[0].clientX - game.offsetLeft;
-  if (mouseX > 0 && mouseX < gameW) {
+  let mouseX = event.touches[0].clientX - rect.left;
+  if (mouseX > 0 && mouseX < rect.right - rect.left) {
     paddleX = mouseX - paddleW / 2;
     paddle.style.left = paddleX + "px";
   }
 });
 
-function balling() {
-  ballX += speedX;
-  ballY += speedY;
-  ball.style.left = ballX + "px";
-  ball.style.top = ballY + "px";
-}
-
-function wallBounce() {
-  if (ballX <= 0 || ballX >= gameW - ballW) {
-    speedX = -speedX;
-  } else if (ballY <= 0) {
-    speedY = -speedY;
+function animate() {
+  if (!ball || !paddle || !scoreCounter) {
+    throw new Error("Cannot find ball/paddle");
   }
-}
-
-function paddleBounce() {
-  if (ballY + ballH + 6 >= gameH) {
-    if (ballX < paddleX + paddleW && ballX + 10 > paddleX) {
+  x += speedX;
+  y += speedY;
+  console.log(x, y);
+  if (x <= 1 && speedX < 0) {
+    speedX = -speedX;
+  } else if (x >= rect.right - rect.left - 25 && speedX > 0) {
+    speedX = -speedX;
+  } else if (y <= 0 && speedY < 0) {
+    speedY = -speedY;
+  } else if (y + 25 >= rect.bottom - rect.top && speedY > 0) {
+    if (x < paddleX + paddleW && x > paddleX) {
       speedY = -speedY;
-      hit();
+      scoreCounter.textContent = `Score: ${score++}`;
+      speedX *= acceleration;
+      speedY *= acceleration;
     } else {
       respawn();
     }
   }
+  ball.style.left = x + "px";
+  ball.style.top = y + "px";
 }
-
-function reset() {
-  ballX = Math.floor(Math.random() * 400);
-  ballY = Math.floor(Math.random() * 100);
-  speedX = INITIALSPEED;
-  speedY = INITIALSPEED;
-}
-
-function hit() {
-  score++;
-  scoreCounter.textContent = `Score: ${score}`;
-  speedX = speedX * 1.05;
-  speedY = speedY * 1.05;
-}
+setInterval(animate, 10);
 
 function respawn() {
+  if (!highscoreCounter || !scoreCounter) {
+    throw new Error("Cannot find HS/S");
+  }
   if (score > highscore) {
     highscore = score;
     highscoreCounter.textContent = `Highscore: ${highscore}`;
@@ -89,14 +83,8 @@ function respawn() {
   }
   score = 0;
   scoreCounter.textContent = `Score: ${score}`;
-  reset();
+  x = Start;
+  y = Start;
+  speedX = StartSpd;
+  speedY = StartSpd;
 }
-
-function run() {
-  balling();
-  wallBounce();
-  paddleBounce();
-  requestAnimationFrame(run);
-}
-
-requestAnimationFrame(run);
