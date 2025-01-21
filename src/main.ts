@@ -14,10 +14,11 @@ if (!game || !scoreCounter || !highscoreCounter || !ball || !paddle) {
 const paddleW = paddle.offsetWidth;
 const rect = game.getBoundingClientRect();
 
-const Start = 50;
+const newX = 150;
+const newY = 20;
 const StartSpd = 5;
-let x = Start;
-let y = Start;
+let x = newX;
+let y = newY;
 let speedX = 5;
 let speedY = 5;
 const acceleration = 1.1;
@@ -85,8 +86,8 @@ function respawn() {
   }
   score = 0;
   scoreCounter.textContent = `Score: ${score}`;
-  x = Start;
-  y = Start;
+  x = newX;
+  y = newY;
   speedX = StartSpd;
   speedY = StartSpd;
 }
