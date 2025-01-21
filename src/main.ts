@@ -1,11 +1,13 @@
 import "/styles/style.scss";
 
-let game = document.querySelector<HTMLDivElement>("#gameContainer");
-let scoreCounter = document.querySelector<HTMLParagraphElement>("#score");
-let highscoreCounter =
-  document.querySelector<HTMLParagraphElement>("#highscore");
-let ball = document.querySelector<HTMLDivElement>("#ball");
-let paddle = document.querySelector<HTMLDivElement>("#paddle");
+let game = document.querySelector<HTMLDivElement>(".game");
+let scoreCounter =
+  document.querySelector<HTMLParagraphElement>(".scoreboard__score");
+let highscoreCounter = document.querySelector<HTMLParagraphElement>(
+  ".scoreboard__highscore"
+);
+let ball = document.querySelector<HTMLDivElement>(".game__ball");
+let paddle = document.querySelector<HTMLDivElement>(".game__paddle");
 
 if (!game || !scoreCounter || !highscoreCounter || !ball || !paddle) {
   throw new Error("missing html elements");
@@ -17,11 +19,12 @@ const rect = game.getBoundingClientRect();
 const newX = 150;
 const newY = 20;
 const StartSpd = 5;
+const acceleration = 1.08;
+
 let x = newX;
 let y = newY;
-let speedX = 5;
-let speedY = 5;
-const acceleration = 1.1;
+let speedX = StartSpd;
+let speedY = StartSpd;
 let paddleX = 0;
 let score = 0;
 let highscore = 0;
@@ -50,14 +53,14 @@ function animate() {
   x += speedX;
   y += speedY;
   console.log(x, y);
-  if (x <= 1 && speedX < 0) {
+  if (x - 5 <= 0 && speedX < 0) {
     speedX = -speedX;
-  } else if (x >= rect.right - rect.left - 25 && speedX > 0) {
+  } else if (x + 25 >= rect.right - rect.left && speedX > 0) {
     speedX = -speedX;
-  } else if (y <= 0 && speedY < 0) {
+  } else if (y - 5 <= 0 && speedY < 0) {
     speedY = -speedY;
   } else if (y + 25 >= rect.bottom - rect.top && speedY > 0) {
-    if (x < paddleX + paddleW && x > paddleX) {
+    if (x < paddleX + paddleW && x > paddleX - 20) {
       speedY = -speedY;
       score++;
       scoreCounter.textContent = `Score: ${score}`;
