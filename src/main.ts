@@ -10,10 +10,10 @@ let ball = document.querySelector<HTMLDivElement>(".game__ball");
 let paddle = document.querySelector<HTMLDivElement>(".game__paddle");
 
 if (!game || !scoreCounter || !highscoreCounter || !ball || !paddle) {
-  throw new Error("missing html elements");
+  throw new Error("Missing html elements");
 }
 
-const paddleW = paddle.offsetWidth;
+const prect = paddle.getBoundingClientRect();
 const rect = game.getBoundingClientRect();
 
 const newX = 150;
@@ -32,7 +32,7 @@ let highscore = 0;
 document.addEventListener("mousemove", (event) => {
   let mouseX = event.clientX - rect.left;
   if (mouseX > 0 && mouseX < rect.right - rect.left) {
-    paddleX = mouseX - paddleW / 2;
+    paddleX = mouseX - (prect.right - prect.left) / 2;
     paddle.style.left = paddleX + "px";
   }
 });
@@ -41,14 +41,14 @@ document.addEventListener("touchmove", (event) => {
   event.preventDefault();
   let mouseX = event.touches[0].clientX - rect.left;
   if (mouseX > 0 && mouseX < rect.right - rect.left) {
-    paddleX = mouseX - paddleW / 2;
+    paddleX = mouseX - (prect.right - prect.left) / 2;
     paddle.style.left = paddleX + "px";
   }
 });
 
 function animate() {
   if (!ball || !paddle || !scoreCounter) {
-    throw new Error("Cannot find ball/paddle");
+    throw new Error("Cannot find ball/paddle or score");
   }
   x += speedX;
   y += speedY;
@@ -60,7 +60,7 @@ function animate() {
   } else if (y - 5 <= 0 && speedY < 0) {
     speedY = -speedY;
   } else if (y + 25 >= rect.bottom - rect.top && speedY > 0) {
-    if (x < paddleX + paddleW && x > paddleX - 20) {
+    if (x < paddleX + prect.right - prect.left && x > paddleX - 20) {
       speedY = -speedY;
       score++;
       scoreCounter.textContent = `Score: ${score}`;
@@ -77,7 +77,7 @@ setInterval(animate, 10);
 
 function respawn() {
   if (!highscoreCounter || !scoreCounter) {
-    throw new Error("Cannot find HS/S");
+    throw new Error("Cannot find scores");
   }
   if (score > highscore) {
     highscore = score;
