@@ -4,7 +4,7 @@
 
 ## Responsiveness
 
-- [ ] Phone compatability
+- [z] Phone compatability
 
 ## HTML/CSS
 
@@ -18,28 +18,28 @@
 
 ## TS
 
-- [ ] Ball
+- [x] Ball
   - [x] Movement
     - [x] Speed increased as game progresses
 - [x] Walls
-  - [ ] Collider
-    - [ ] Left wall
-    - [ ] Right wall
-    - [ ] Top wall
-    - [ ] Ball changes trajectory
+  - [x] Collider
+    - [x] Left wall
+    - [x] Right wall
+    - [x] Top wall
+    - [x] Ball changes trajectory
 - [x] Paddle
   - [x] Movement
     - [x] Mouse input
     - [x] Touch input
-  - [ ] Collider
-    - [ ] Ball changes trajectory (depending on part of paddle hit?)
+  - [x] Collider
+    - [x] Ball changes trajectory (depending on part of paddle hit?)
     - [x] Score ++
-- [ ] Walls (bottom)
+- [x] Walls (bottom)
   - [x] Highscore check
-  - [ ] Reset game
+  - [x] Reset game
 - [x] Game loop
   - [x] Animation
-    - [ ] Detect collisions
-    - [ ] Move Ball
-  - [ ] Difficulty increase over time
+    - [x] Detect collisions
+    - [x] Move Ball
+  - [x] Difficulty increase over time
   - [ ] Game over? (lives?)
