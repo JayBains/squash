@@ -1,4 +1,5 @@
 import "/styles/style.scss";
+import "../assets/bounce.mp3";
 
 let button = document.querySelector<HTMLButtonElement>(".butt");
 let container = document.querySelector<HTMLDivElement>(".container");
@@ -27,6 +28,7 @@ document.addEventListener("click", () => {
   container.style.display = "flex";
   button.style.display = "none";
 
+  const audio = new Audio("assets/bounce.mp3");
   const prect = paddle.getBoundingClientRect();
   const rect = game.getBoundingClientRect();
 
@@ -74,6 +76,7 @@ document.addEventListener("click", () => {
       speedY = -speedY;
     } else if (y + 25 >= rect.bottom - rect.top && speedY > 0) {
       if (x - 25 < paddleX + prect.right - prect.left && x > paddleX) {
+        audio.play();
         speedY = -speedY;
         score++;
         scoreCounter.textContent = `Score: ${score}`;
