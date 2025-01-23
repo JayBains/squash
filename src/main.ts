@@ -1,7 +1,7 @@
 import "/styles/style.scss";
 import "../assets/bounce.mp3";
 
-let button = document.querySelector<HTMLButtonElement>(".butt");
+let button = document.querySelector<HTMLButtonElement>(".home__button");
 let container = document.querySelector<HTMLDivElement>(".container");
 let game = document.querySelector<HTMLDivElement>(".game");
 let scoreCounter =
@@ -74,8 +74,8 @@ document.addEventListener("click", () => {
       speedX = -speedX;
     } else if (y - 5 <= 0 && speedY < 0) {
       speedY = -speedY;
-    } else if (y + 25 >= rect.bottom - rect.top && speedY > 0) {
-      if (x - 25 < paddleX + prect.right - prect.left && x > paddleX) {
+    } else if (y + 30 >= rect.bottom - rect.top && speedY > 0) {
+      if (x - 15 < paddleX + prect.right - prect.left && x + 15 > paddleX) {
         audio.play();
         speedY = -speedY;
         score++;
