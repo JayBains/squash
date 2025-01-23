@@ -14,8 +14,8 @@ This is my version of single-player squash written in HTML, SCSS and TS.
 - [x] Ball
 - [x] Paddle
 - [x] Retro aesthetic
-- [ ] Start menu
-  - [ ] About page
+- [x] Start menu
+  - [x] About page
 
 ## TS
 
