@@ -1,5 +1,7 @@
 import "/styles/style.scss";
 
+let button = document.querySelector<HTMLButtonElement>(".butt");
+let container = document.querySelector<HTMLDivElement>(".container");
 let game = document.querySelector<HTMLDivElement>(".game");
 let scoreCounter =
   document.querySelector<HTMLParagraphElement>(".scoreboard__score");
@@ -9,88 +11,100 @@ let highscoreCounter = document.querySelector<HTMLParagraphElement>(
 let ball = document.querySelector<HTMLDivElement>(".game__ball");
 let paddle = document.querySelector<HTMLDivElement>(".game__paddle");
 
-if (!game || !scoreCounter || !highscoreCounter || !ball || !paddle) {
+if (
+  !button ||
+  !container ||
+  !game ||
+  !scoreCounter ||
+  !highscoreCounter ||
+  !ball ||
+  !paddle
+) {
   throw new Error("Missing html elements");
 }
 
-const prect = paddle.getBoundingClientRect();
-const rect = game.getBoundingClientRect();
+document.addEventListener("click", () => {
+  container.style.display = "flex";
+  button.style.display = "none";
 
-const newX = 150;
-const newY = 20;
-const StartSpd = 5;
-const acceleration = 1.08;
+  const prect = paddle.getBoundingClientRect();
+  const rect = game.getBoundingClientRect();
 
-let x = newX;
-let y = newY;
-let speedX = StartSpd;
-let speedY = StartSpd;
-let paddleX = 0;
-let score = 0;
-let highscore = 0;
+  const newX = 150;
+  const newY = 20;
+  const StartSpd = 5;
+  const acceleration = 1.08;
+  let x = newX;
+  let y = newY;
+  let speedX = StartSpd;
+  let speedY = StartSpd;
+  let paddleX = 0;
+  let score = 0;
+  let highscore = 0;
 
-document.addEventListener("mousemove", (event) => {
-  let mouseX = event.clientX - rect.left;
-  if (mouseX > 0 && mouseX < rect.right - rect.left) {
-    paddleX = mouseX - (prect.right - prect.left) / 2;
-    paddle.style.left = paddleX + "px";
-  }
-});
-
-document.addEventListener("touchmove", (event) => {
-  event.preventDefault();
-  let mouseX = event.touches[0].clientX - rect.left;
-  if (mouseX > 0 && mouseX < rect.right - rect.left) {
-    paddleX = mouseX - (prect.right - prect.left) / 2;
-    paddle.style.left = paddleX + "px";
-  }
-});
-
-function animate() {
-  if (!ball || !paddle || !scoreCounter) {
-    throw new Error("Cannot find ball/paddle or score");
-  }
-  x += speedX;
-  y += speedY;
-  console.log(x, y);
-  if (x - 5 <= 0 && speedX < 0) {
-    speedX = -speedX;
-  } else if (x + 25 >= rect.right - rect.left && speedX > 0) {
-    speedX = -speedX;
-  } else if (y - 5 <= 0 && speedY < 0) {
-    speedY = -speedY;
-  } else if (y + 25 >= rect.bottom - rect.top && speedY > 0) {
-    if (x < paddleX + prect.right - prect.left && x + 20 > paddleX) {
-      speedY = -speedY;
-      score++;
-      scoreCounter.textContent = `Score: ${score}`;
-      speedX *= acceleration;
-      speedY *= acceleration;
-    } else {
-      respawn();
+  document.addEventListener("mousemove", (event) => {
+    let mouseX = event.clientX - rect.left;
+    if (mouseX > 0 && mouseX < rect.right - rect.left) {
+      paddleX = mouseX - (prect.right - prect.left) / 2;
+      paddle.style.left = paddleX + "px";
     }
-  }
-  ball.style.left = x + "px";
-  ball.style.top = y + "px";
-}
-setInterval(animate, 10);
+  });
 
-function respawn() {
-  if (!highscoreCounter || !scoreCounter) {
-    throw new Error("Cannot find scores");
+  document.addEventListener("touchmove", (event) => {
+    event.preventDefault();
+    let mouseX = event.touches[0].clientX - rect.left;
+    if (mouseX > 0 && mouseX < rect.right - rect.left) {
+      paddleX = mouseX - (prect.right - prect.left) / 2;
+      paddle.style.left = paddleX + "px";
+    }
+  });
+
+  function animate() {
+    if (!ball || !paddle || !scoreCounter) {
+      throw new Error("Cannot find ball/paddle or score");
+    }
+    x += speedX;
+    y += speedY;
+    console.log(x, y);
+    if (x - 5 <= 0 && speedX < 0) {
+      speedX = -speedX;
+    } else if (x + 25 >= rect.right - rect.left && speedX > 0) {
+      speedX = -speedX;
+    } else if (y - 5 <= 0 && speedY < 0) {
+      speedY = -speedY;
+    } else if (y + 25 >= rect.bottom - rect.top && speedY > 0) {
+      if (x - 25 < paddleX + prect.right - prect.left && x > paddleX) {
+        speedY = -speedY;
+        score++;
+        scoreCounter.textContent = `Score: ${score}`;
+        speedX *= acceleration;
+        speedY *= acceleration;
+      } else {
+        respawn();
+      }
+    }
+    ball.style.left = x + "px";
+    ball.style.top = y + "px";
   }
-  if (score > highscore) {
-    highscore = score;
-    highscoreCounter.textContent = `Highscore: ${highscore}`;
-    console.log(`New high score! You got: ${highscore}!`);
-    alert(`New high score! You got: ${highscore}!`);
-  } else {
-    console.log(`Nice try. You scored: ${score}.`);
+  setInterval(animate, 10);
+
+  function respawn() {
+    if (!highscoreCounter || !scoreCounter) {
+      throw new Error("Cannot find scores");
+    }
+    if (score > highscore) {
+      highscore = score;
+      highscoreCounter.textContent = `Highscore: ${highscore}`;
+      console.log(`New high score! You got: ${highscore}!`);
+      alert(`New high score! You got: ${highscore}!`);
+    } else {
+      console.log(`Nice try. You scored: ${score}.`);
+    }
+    score = 0;
+    scoreCounter.textContent = `Score: ${score}`;
+    x = newX;
+    y = newY;
+    speedX = StartSpd;
+    speedY = StartSpd;
   }
-  score = 0;
-  scoreCounter.textContent = `Score: ${score}`;
-  x = newX;
-  y = newY;
-  speedX = StartSpd;
-  speedY = StartSpd;
-}
+});

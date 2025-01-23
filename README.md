@@ -4,7 +4,7 @@
 
 ## Responsiveness
 
-- [z] Phone compatability
+- [x] Phone compatability
 
 ## HTML/CSS
 
