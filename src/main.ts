@@ -1,6 +1,7 @@
 import "/styles/style.scss";
 import "../assets/bounce.mp3";
 
+let home = document.querySelector<HTMLDivElement>(".home");
 let button = document.querySelector<HTMLButtonElement>(".home__button");
 let container = document.querySelector<HTMLDivElement>(".container");
 let game = document.querySelector<HTMLDivElement>(".game");
@@ -13,6 +14,7 @@ let ball = document.querySelector<HTMLDivElement>(".game__ball");
 let paddle = document.querySelector<HTMLDivElement>(".game__paddle");
 
 if (
+  !home ||
   !button ||
   !container ||
   !game ||
@@ -24,9 +26,9 @@ if (
   throw new Error("Missing html elements");
 }
 
-document.addEventListener("click", () => {
+button.addEventListener("click", () => {
   container.style.display = "flex";
-  button.style.display = "none";
+  home.style.display = "none";
 
   const audio = new Audio("assets/bounce.mp3");
   const prect = paddle.getBoundingClientRect();

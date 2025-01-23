@@ -1,12 +1,13 @@
 body {
   background-color: black;
+  color: white;
   font-size: 20px;
   font-weight: bold;
-  cursor: none;
 }
 
 .container {
   display: none;
   justify-content: center;
   flex-direction: column;
+  cursor: none;
 }
