@@ -1,5 +1,5 @@
 import "/styles/style.scss";
-import "../assets/bounce.mp3";
+import bounceSound from "../assets/bounce.mp3";
 
 let home = document.querySelector<HTMLDivElement>(".home");
 let button = document.querySelector<HTMLButtonElement>(".home__button");
@@ -26,18 +26,26 @@ if (
   throw new Error("Missing html elements");
 }
 
-button.addEventListener("click", () => {
-  container.style.display = "flex";
-  home.style.display = "none";
+let prect: DOMRect;
+let rect: DOMRect;
 
-  const audio = new Audio("assets/bounce.mp3");
-  const prect = paddle.getBoundingClientRect();
-  const rect = game.getBoundingClientRect();
+window.addEventListener("resize", (event) => {
+  prect = paddle.getBoundingClientRect();
+  rect = game.getBoundingClientRect();
+});
+
+const run = () => {
+  home.style.display = "none";
+  container.style.display = "flex";
+
+  const audio = new Audio(bounceSound);
+  prect = paddle.getBoundingClientRect();
+  rect = game.getBoundingClientRect();
 
   const newX = 150;
   const newY = 20;
   const StartSpd = 5;
-  const acceleration = 1.08;
+  const acceleration = 1.06;
   let x = newX;
   let y = newY;
   let speedX = StartSpd;
@@ -112,4 +120,8 @@ button.addEventListener("click", () => {
     speedX = StartSpd;
     speedY = StartSpd;
   }
+};
+
+button.addEventListener("click", () => {
+  run();
 });
