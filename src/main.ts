@@ -49,8 +49,8 @@ const run = () => {
   const acceleration = 1.02;
   let x = newX;
   let y = newY;
-  let speedX = StartSpd;
-  let speedY = StartSpd;
+  let speedX = Math.round(Math.random()) ? -1 * StartSpd : StartSpd;
+  let speedY = Math.round(Math.random()) ? -1 * StartSpd : StartSpd;
   let paddleX = 0;
   let score = 0;
   let highscore = 0;
@@ -118,8 +118,8 @@ const run = () => {
     scoreCounter.textContent = `Score: ${score}`;
     x = newX;
     y = newY;
-    speedX = StartSpd;
-    speedY = StartSpd;
+    speedX = Math.round(Math.random()) ? -1 * StartSpd : StartSpd;
+    speedY = Math.round(Math.random()) ? -1 * StartSpd : StartSpd;
   }
 };
 
