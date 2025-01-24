@@ -23,7 +23,7 @@ if (
   !ball ||
   !paddle
 ) {
-  throw new Error("Missing html elements");
+  throw new Error("HTML error: Missing elements");
 }
 
 let prect: DOMRect;
@@ -78,7 +78,7 @@ const run = () => {
 
   function animate() {
     if (!ball || !paddle || !scoreCounter) {
-      throw new Error("Cannot find ball/paddle or score");
+      throw new Error("animate() error: Cannot find ball, paddle or score");
     }
     x += speedX;
     y += speedY;
@@ -107,16 +107,18 @@ const run = () => {
 
   function respawn() {
     if (!highscoreCounter || !scoreCounter || !ball) {
-      throw new Error("Cannot find scores");
+      throw new Error("respawn() error: cannot find scores or ball");
     }
+    speedX = 0;
+    speedY = 0;
+    ball.style.backgroundColor = "red";
     if (score > highscore) {
       highscore = score;
       highscoreCounter.textContent = `Highscore: ${highscore}`;
       alert(`New high score! You got: ${highscore}!`);
     }
-    speedX = 0;
-    speedY = 0;
     sleep(1000).then(() => {
+      ball.style.backgroundColor = "white";
       score = 0;
       scoreCounter.textContent = `Score: ${score}`;
       x = newX;
