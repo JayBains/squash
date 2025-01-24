@@ -30,7 +30,6 @@ let prect: DOMRect;
 let rect: DOMRect;
 
 window.addEventListener("resize", (event) => {
-  console.log(event);
   prect = paddle.getBoundingClientRect();
   rect = game.getBoundingClientRect();
 });
