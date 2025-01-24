@@ -82,7 +82,6 @@ const run = () => {
     }
     x += speedX;
     y += speedY;
-    console.log(x, y);
     if (x - 5 <= 0 && speedX < 0) {
       speedX = -speedX;
     } else if (x + 25 >= rect.right - rect.left && speedX > 0) {
@@ -113,15 +112,13 @@ const run = () => {
     if (score > highscore) {
       highscore = score;
       highscoreCounter.textContent = `Highscore: ${highscore}`;
-      console.log(`New high score! You got: ${highscore}!`);
       alert(`New high score! You got: ${highscore}!`);
-    } else {
-      console.log(`Nice try. You scored: ${score}.`);
     }
-    scoreCounter.textContent = `Score: ${score}`;
     speedX = 0;
     speedY = 0;
     sleep(1000).then(() => {
+      score = 0;
+      scoreCounter.textContent = `Score: ${score}`;
       x = newX;
       y = newY;
       speedX = Math.round(Math.random()) ? -1 * StartSpd : StartSpd;
