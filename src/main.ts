@@ -46,7 +46,7 @@ const run = () => {
   const newX = 150;
   const newY = 20;
   const StartSpd = 5;
-  const acceleration = 1.06;
+  const acceleration = 1.02;
   let x = newX;
   let y = newY;
   let speedX = StartSpd;
