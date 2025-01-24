@@ -35,6 +35,10 @@ window.addEventListener("resize", (event) => {
   return event;
 });
 
+function sleep(ms: number) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
 const run = () => {
   home.style.display = "none";
   container.style.display = "flex";
@@ -85,8 +89,8 @@ const run = () => {
       speedX = -speedX;
     } else if (y - 5 <= 0 && speedY < 0) {
       speedY = -speedY;
-    } else if (y + 30 >= rect.bottom - rect.top && speedY > 0) {
-      if (x - 15 < paddleX + prect.right - prect.left && x + 15 > paddleX) {
+    } else if (y + 25 >= rect.bottom - rect.top && speedY > 0) {
+      if (x + 15 > paddleX && x + 5 < paddleX + prect.right - prect.left) {
         audio.play();
         speedY = -speedY;
         score++;
@@ -103,7 +107,7 @@ const run = () => {
   setInterval(animate, 10);
 
   function respawn() {
-    if (!highscoreCounter || !scoreCounter) {
+    if (!highscoreCounter || !scoreCounter || !ball) {
       throw new Error("Cannot find scores");
     }
     if (score > highscore) {
@@ -114,12 +118,15 @@ const run = () => {
     } else {
       console.log(`Nice try. You scored: ${score}.`);
     }
-    score = 0;
     scoreCounter.textContent = `Score: ${score}`;
-    x = newX;
-    y = newY;
-    speedX = Math.round(Math.random()) ? -1 * StartSpd : StartSpd;
-    speedY = Math.round(Math.random()) ? -1 * StartSpd : StartSpd;
+    speedX = 0;
+    speedY = 0;
+    sleep(1000).then(() => {
+      x = newX;
+      y = newY;
+      speedX = Math.round(Math.random()) ? -1 * StartSpd : StartSpd;
+      speedY = Math.round(Math.random()) ? -1 * StartSpd : StartSpd;
+    });
   }
 };
 
