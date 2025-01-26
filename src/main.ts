@@ -29,15 +29,15 @@ if (
 let prect: DOMRect;
 let rect: DOMRect;
 
+function sleep(ms: number) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
 window.addEventListener("resize", (event) => {
   prect = paddle.getBoundingClientRect();
   rect = game.getBoundingClientRect();
   return event;
 });
-
-function sleep(ms: number) {
-  return new Promise((resolve) => setTimeout(resolve, ms));
-}
 
 const run = () => {
   home.style.display = "none";
@@ -112,19 +112,22 @@ const run = () => {
     speedX = 0;
     speedY = 0;
     ball.style.backgroundColor = "red";
-    if (score > highscore) {
-      highscore = score;
-      highscoreCounter.textContent = `Highscore: ${highscore}`;
-      alert(`New high score! You got: ${highscore}!`);
-    }
-    sleep(1000).then(() => {
-      ball.style.backgroundColor = "white";
-      score = 0;
-      scoreCounter.textContent = `Score: ${score}`;
-      x = newX;
-      y = newY;
-      speedX = Math.round(Math.random()) ? -1 * StartSpd : StartSpd;
-      speedY = Math.round(Math.random()) ? -1 * StartSpd : StartSpd;
+    sleep(200).then(() => {
+      if (score > highscore) {
+        highscore = score;
+        highscoreCounter.textContent = `Highscore: ${highscore}`;
+        alert(`New high score! You got: ${highscore}!`);
+      }
+
+      sleep(1000).then(() => {
+        ball.style.backgroundColor = "white";
+        score = 0;
+        scoreCounter.textContent = `Score: ${score}`;
+        x = newX;
+        y = newY;
+        speedX = Math.round(Math.random()) ? -1 * StartSpd : StartSpd;
+        speedY = Math.round(Math.random()) ? -1 * StartSpd : StartSpd;
+      });
     });
   }
 };
