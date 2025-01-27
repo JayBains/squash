@@ -1,12 +1,23 @@
 # SQUASH
 
-This is my version of single-player squash written in HTML, SCSS and TS.
+Welcome to Squash!
 
-## Responsiveness
+This is a single player arcade game inspired by Atari's 1972 Pong, written in HTML, SCSS and TS using BEM methodology.
 
-- [x] Phone compatability
+The aim of the game is to score as high as you can, which you can access from this link: https://jaybains.github.io/squash/.
 
-## HTML/CSS
+Please enjoy and thank you for playing!
+
+## Issues
+
+- Ball is slow on small screen sizes.
+- Small screens display a square game container, making ball trajectory obvious
+- Ball speed increases exponentially.
+- High scores do not save
+
+## Checklist
+
+### HTML/CSS
 
 - [x] Score counter
 - [x] Highscore counter
@@ -17,7 +28,7 @@ This is my version of single-player squash written in HTML, SCSS and TS.
 - [x] Start menu
   - [x] About page
 
-## TS
+### TS
 
 - [x] Game loop
   - [x] Paddle
