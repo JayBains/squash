@@ -26,12 +26,12 @@ if (
   throw new Error("HTML error: Missing elements");
 }
 
-let prect: DOMRect;
-let rect: DOMRect;
-
 function sleep(ms: number) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
+
+let prect: DOMRect;
+let rect: DOMRect;
 
 window.addEventListener("resize", (event) => {
   prect = paddle.getBoundingClientRect();
@@ -49,7 +49,7 @@ const run = () => {
 
   const newX = 150;
   const newY = 20;
-  const StartSpd = 5;
+  const StartSpd = 2;
   const acceleration = 1.02;
   let x = newX;
   let y = newY;
@@ -103,7 +103,6 @@ const run = () => {
     ball.style.left = x + "px";
     ball.style.top = y + "px";
   }
-  setInterval(animate, 10);
 
   function respawn() {
     if (!highscoreCounter || !scoreCounter || !ball) {
@@ -130,6 +129,12 @@ const run = () => {
       });
     });
   }
+
+  function gameLoop() {
+    animate();
+    requestAnimationFrame(gameLoop);
+  }
+  requestAnimationFrame(gameLoop);
 };
 
 button.addEventListener("click", () => {
