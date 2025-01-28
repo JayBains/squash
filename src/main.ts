@@ -12,6 +12,8 @@ let highscoreCounter = document.querySelector<HTMLParagraphElement>(
 );
 let ball = document.querySelector<HTMLDivElement>(".game__ball");
 let paddle = document.querySelector<HTMLDivElement>(".game__paddle");
+let prect: DOMRect;
+let rect: DOMRect;
 
 if (
   !home ||
@@ -25,13 +27,6 @@ if (
 ) {
   throw new Error("HTML error: Missing elements");
 }
-
-function sleep(ms: number) {
-  return new Promise((resolve) => setTimeout(resolve, ms));
-}
-
-let prect: DOMRect;
-let rect: DOMRect;
 
 window.addEventListener("resize", (event) => {
   prect = paddle.getBoundingClientRect();
@@ -49,7 +44,7 @@ const run = () => {
 
   const newX = 150;
   const newY = 20;
-  const StartSpd = 2;
+  const StartSpd = 3;
   const acceleration = 1.02;
   let x = newX;
   let y = newY;
@@ -102,6 +97,10 @@ const run = () => {
     }
     ball.style.left = x + "px";
     ball.style.top = y + "px";
+  }
+
+  function sleep(ms: number) {
+    return new Promise((resolve) => setTimeout(resolve, ms));
   }
 
   function respawn() {
