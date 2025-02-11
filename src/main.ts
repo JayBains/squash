@@ -12,8 +12,8 @@ let highscoreCounter = document.querySelector<HTMLParagraphElement>(
 );
 let ball = document.querySelector<HTMLDivElement>(".game__ball");
 let paddle = document.querySelector<HTMLDivElement>(".game__paddle");
-let prect: DOMRect;
-let rect: DOMRect;
+let paddleBox: DOMRect;
+let gameBox: DOMRect;
 
 if (
   !home ||
@@ -29,83 +29,89 @@ if (
 }
 
 window.addEventListener("resize", (event) => {
-  rect = game.getBoundingClientRect();
+  gameBox = game.getBoundingClientRect();
   return event;
 });
 
 button.addEventListener("click", () => {
-  run();
+  PlayGame();
 });
 
-const run = () => {
+const PlayGame = () => {
   home.style.display = "none";
   container.style.display = "flex";
 
-  prect = paddle.getBoundingClientRect();
-  rect = game.getBoundingClientRect();
+  paddleBox = paddle.getBoundingClientRect();
+  gameBox = game.getBoundingClientRect();
 
-  const audio = new Audio(bounceSound);
-  const newX = 150;
-  const newY = 20;
-  const StartSpd = 3;
-  const acceleration = 1.02;
-  let speedX = Math.round(Math.random()) ? -1 * StartSpd : StartSpd;
-  let speedY = Math.round(Math.random()) ? -1 * StartSpd : StartSpd;
-  let ballX = newX;
-  let ballY = newY;
-  let paddleX = 0;
+  const AUDIO = new Audio(bounceSound);
+  const X_START_POSITION = 150;
+  const Y_START_POSITION = 20;
+  const START_SPEED = 3;
+  const ACCELERATION = 1.02;
+  let speedX = Math.round(Math.random()) ? -1 * START_SPEED : START_SPEED;
+  let speedY = Math.round(Math.random()) ? -1 * START_SPEED : START_SPEED;
+  let ballPositionX = X_START_POSITION;
+  let ballPositionY = Y_START_POSITION;
+  let paddlePositionX = 0;
   let score = 0;
   let highscore = 0;
 
   document.addEventListener("mousemove", (event) => {
-    let mouseX = event.clientX - rect.left;
-    if (mouseX > 0 && mouseX < rect.right - rect.left) {
-      paddleX = mouseX - (prect.right - prect.left) / 2;
-      paddle.style.left = paddleX + "px";
+    let mouseX = event.clientX - gameBox.left;
+    if (mouseX > 0 && mouseX < gameBox.right - gameBox.left) {
+      paddlePositionX = mouseX - (paddleBox.right - paddleBox.left) / 2;
+      paddle.style.left = paddlePositionX + "px";
     }
   });
 
   document.addEventListener("touchmove", (event) => {
     event.preventDefault();
-    let mouseX = event.touches[0].clientX - rect.left;
-    if (mouseX > 0 && mouseX < rect.right - rect.left) {
-      paddleX = mouseX - (prect.right - prect.left) / 2;
-      paddle.style.left = paddleX + "px";
+    let mouseX = event.touches[0].clientX - gameBox.left;
+    if (mouseX > 0 && mouseX < gameBox.right - gameBox.left) {
+      paddlePositionX = mouseX - (paddleBox.right - paddleBox.left) / 2;
+      paddle.style.left = paddlePositionX + "px";
     }
   });
 
-  function physics() {
+  const Physics = () => {
     if (!ball || !paddle || !scoreCounter) {
       throw new Error("physics() error: Cannot find ball, paddle or score");
     }
-    ballX += speedX;
-    ballY += speedY;
-    if (ballX - 5 <= 0 && speedX < 0) {
+    ballPositionX += speedX;
+    ballPositionY += speedY;
+    if (ballPositionX - 5 <= 0 && speedX < 0) {
       speedX = -speedX;
-    } else if (ballX + 25 >= rect.right - rect.left && speedX > 0) {
+    } else if (
+      ballPositionX + 25 >= gameBox.right - gameBox.left &&
+      speedX > 0
+    ) {
       speedX = -speedX;
-    } else if (ballY - 5 <= 0 && speedY < 0) {
+    } else if (ballPositionY - 5 <= 0 && speedY < 0) {
       speedY = -speedY;
-    } else if (ballY + 25 >= rect.bottom - rect.top && speedY > 0) {
+    } else if (
+      ballPositionY + 25 >= gameBox.bottom - gameBox.top &&
+      speedY > 0
+    ) {
       if (
-        ballX + 15 > paddleX &&
-        ballX + 5 < paddleX + prect.right - prect.left
+        ballPositionX + 15 > paddlePositionX &&
+        ballPositionX + 5 < paddlePositionX + paddleBox.right - paddleBox.left
       ) {
-        audio.play();
+        AUDIO.play();
         speedY = -speedY;
         score++;
         scoreCounter.textContent = `Score: ${score}`;
-        speedX *= acceleration;
-        speedY *= acceleration;
+        speedX *= ACCELERATION;
+        speedY *= ACCELERATION;
       } else {
-        gameOver();
+        GameOver();
       }
     }
-    ball.style.left = ballX + "px";
-    ball.style.top = ballY + "px";
-  }
+    ball.style.left = ballPositionX + "px";
+    ball.style.top = ballPositionY + "px";
+  };
 
-  function gameOver() {
+  const GameOver = () => {
     if (!highscoreCounter || !scoreCounter || !ball) {
       throw new Error("gameOver() error: cannot find scores or ball");
     }
@@ -122,17 +128,17 @@ const run = () => {
         ball.style.backgroundColor = "white";
         score = 0;
         scoreCounter.textContent = `Score: ${score}`;
-        ballX = newX;
-        ballY = newY;
-        speedX = Math.round(Math.random()) ? -1 * StartSpd : StartSpd;
-        speedY = Math.round(Math.random()) ? -1 * StartSpd : StartSpd;
+        ballPositionX = X_START_POSITION;
+        ballPositionY = Y_START_POSITION;
+        speedX = Math.round(Math.random()) ? -1 * START_SPEED : START_SPEED;
+        speedY = Math.round(Math.random()) ? -1 * START_SPEED : START_SPEED;
       }, 1000);
     }, 200);
-  }
+  };
 
-  function gameLoop() {
-    physics();
-    requestAnimationFrame(gameLoop);
-  }
-  requestAnimationFrame(gameLoop);
+  const AnimationLoop = () => {
+    Physics();
+    requestAnimationFrame(AnimationLoop);
+  };
+  requestAnimationFrame(AnimationLoop);
 };
