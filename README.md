@@ -4,7 +4,8 @@ Welcome to Squash!
 
 This is a single player arcade game inspired by Atari's 1972 Pong, written in HTML, SCSS and TS using BEM methodology.
 
-The aim of the game is to score as high as you can, which you can access from this link: https://jaybains.github.io/squash/.
+The aim of the game is to score as high as you can, which you can access from this link:
+https://jaybains.github.io/squash/
 
 Please enjoy and thank you for playing!
 
