@@ -80,14 +80,14 @@ const PlayGame = () => {
     }
     ballPositionX += speedX;
     ballPositionY += speedY;
-    if (ballPositionX - 5 <= 0 && speedX < 0) {
+    if (ballPositionX <= 0 && speedX < 0) {
       speedX = -speedX;
     } else if (
-      ballPositionX + 25 >= gameBox.right - gameBox.left &&
+      ballPositionX + 20 >= gameBox.right - gameBox.left &&
       speedX > 0
     ) {
       speedX = -speedX;
-    } else if (ballPositionY - 5 <= 0 && speedY < 0) {
+    } else if (ballPositionY <= 0 && speedY < 0) {
       speedY = -speedY;
     } else if (
       ballPositionY + 25 >= gameBox.bottom - gameBox.top &&
